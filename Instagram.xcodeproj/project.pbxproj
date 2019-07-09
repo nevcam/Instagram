@@ -13,6 +13,10 @@
 		D9A3996222D40730009397AE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A3996122D40730009397AE /* LoginViewController.m */; };
 		D9A3996522D40859009397AE /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A3996422D40859009397AE /* SignUpViewController.m */; };
 		D9A3996822D41468009397AE /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A3996722D41468009397AE /* TimelineViewController.m */; };
+		D9AB757222D5001700D267FC /* NewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AB757122D5001700D267FC /* NewPostViewController.m */; };
+		D9AB757622D5152900D267FC /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AB757522D5152900D267FC /* MainTabBarController.m */; };
+		D9AB757922D5228900D267FC /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AB757822D5228900D267FC /* Post.m */; };
+		D9AB757D22D540E400D267FC /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AB757C22D540E400D267FC /* PostCell.m */; };
 		D9FC5B7A22D3FB26003F13A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9FC5B7922D3FB26003F13A5 /* AppDelegate.m */; };
 		D9FC5B7D22D3FB26003F13A5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9FC5B7C22D3FB26003F13A5 /* ViewController.m */; };
 		D9FC5B8022D3FB26003F13A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9FC5B7E22D3FB26003F13A5 /* Main.storyboard */; };
@@ -53,6 +57,14 @@
 		D9A3996422D40859009397AE /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		D9A3996622D41468009397AE /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
 		D9A3996722D41468009397AE /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
+		D9AB757022D5001700D267FC /* NewPostViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewPostViewController.h; sourceTree = "<group>"; };
+		D9AB757122D5001700D267FC /* NewPostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewPostViewController.m; sourceTree = "<group>"; };
+		D9AB757422D5152900D267FC /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		D9AB757522D5152900D267FC /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		D9AB757722D5228900D267FC /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		D9AB757822D5228900D267FC /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		D9AB757B22D540E400D267FC /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
+		D9AB757C22D540E400D267FC /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		D9FC5B7522D3FB26003F13A5 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9FC5B7822D3FB26003F13A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D9FC5B7922D3FB26003F13A5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -125,6 +137,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D9AB757322D5002F00D267FC /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D9AB757022D5001700D267FC /* NewPostViewController.h */,
+				D9AB757122D5001700D267FC /* NewPostViewController.m */,
+				D9A3996622D41468009397AE /* TimelineViewController.h */,
+				D9A3996722D41468009397AE /* TimelineViewController.m */,
+				D9A3996022D40730009397AE /* LoginViewController.h */,
+				D9A3996122D40730009397AE /* LoginViewController.m */,
+				D9AB757422D5152900D267FC /* MainTabBarController.h */,
+				D9AB757522D5152900D267FC /* MainTabBarController.m */,
+				D9A3996322D40859009397AE /* SignUpViewController.h */,
+				D9A3996422D40859009397AE /* SignUpViewController.m */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D9AB757A22D5229400D267FC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D9AB757722D5228900D267FC /* Post.h */,
+				D9AB757822D5228900D267FC /* Post.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		D9FC5B6C22D3FB26003F13A5 = {
 			isa = PBXGroup;
 			children = (
@@ -150,17 +188,15 @@
 		D9FC5B7722D3FB26003F13A5 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				D9AB757A22D5229400D267FC /* Models */,
+				D9AB757322D5002F00D267FC /* View Controllers */,
+				D9AB757B22D540E400D267FC /* PostCell.h */,
+				D9AB757C22D540E400D267FC /* PostCell.m */,
 				D9FC5B7822D3FB26003F13A5 /* AppDelegate.h */,
 				D9FC5B7922D3FB26003F13A5 /* AppDelegate.m */,
 				D9FC5B7B22D3FB26003F13A5 /* ViewController.h */,
 				D9FC5B7C22D3FB26003F13A5 /* ViewController.m */,
 				D9FC5B7E22D3FB26003F13A5 /* Main.storyboard */,
-				D9A3996622D41468009397AE /* TimelineViewController.h */,
-				D9A3996722D41468009397AE /* TimelineViewController.m */,
-				D9A3996322D40859009397AE /* SignUpViewController.h */,
-				D9A3996422D40859009397AE /* SignUpViewController.m */,
-				D9A3996022D40730009397AE /* LoginViewController.h */,
-				D9A3996122D40730009397AE /* LoginViewController.m */,
 				D9FC5B8122D3FB27003F13A5 /* Assets.xcassets */,
 				D9FC5B8322D3FB27003F13A5 /* LaunchScreen.storyboard */,
 				D9FC5B8622D3FB27003F13A5 /* Info.plist */,
@@ -407,12 +443,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9AB757222D5001700D267FC /* NewPostViewController.m in Sources */,
 				D9A3996222D40730009397AE /* LoginViewController.m in Sources */,
 				D9A3996522D40859009397AE /* SignUpViewController.m in Sources */,
 				D9FC5B7D22D3FB26003F13A5 /* ViewController.m in Sources */,
+				D9AB757922D5228900D267FC /* Post.m in Sources */,
 				D9FC5B8822D3FB27003F13A5 /* main.m in Sources */,
 				D9FC5B7A22D3FB26003F13A5 /* AppDelegate.m in Sources */,
+				D9AB757622D5152900D267FC /* MainTabBarController.m in Sources */,
 				D9A3996822D41468009397AE /* TimelineViewController.m in Sources */,
+				D9AB757D22D540E400D267FC /* PostCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

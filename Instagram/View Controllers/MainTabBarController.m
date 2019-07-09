@@ -1,32 +1,38 @@
 //
-//  TimelineViewController.m
+//  MainTabBarController.m
 //  Instagram
 //
-//  Created by nev on 7/8/19.
+//  Created by nev on 7/9/19.
 //  Copyright © 2019 nev. All rights reserved.
 //
 
-#import "TimelineViewController.h"
+#import "MainTabBarController.h"
+#import "Parse/Parse.h"
+#import "AppDelegate.h"
 #import "LoginViewController.h"
 
-@interface TimelineViewController ()
+@interface MainTabBarController ()
 
 @end
 
-@implementation TimelineViewController
+@implementation MainTabBarController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
-
 - (IBAction)didTapLogout:(id)sender {
+    
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         // PFUser.current() will now be nil
     }];
-    [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+//    [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
     NSLog(@"%@", @"Logged out successfully!");
-
 }
 
 /*

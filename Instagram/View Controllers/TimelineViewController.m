@@ -12,13 +12,19 @@
 #import "PostCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "DetailsViewController.h"
+#import "AppDelegate.h"
+#import "InfiniteScrollActivityView.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (nonatomic, strong) NSMutableArray *posts;
 @end
 
 @implementation TimelineViewController
+
+bool isMoreDataLoading = false;
+InfiniteScrollActivityView* loadingMoreView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,7 +35,16 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
-
+    //infinite scroll
+    CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+    loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
+    loadingMoreView.hidden = true;
+    [self.tableView addSubview:loadingMoreView];
+    
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.bottom += InfiniteScrollActivityView.defaultHeight;
+    self.tableView.contentInset = insets;
+    //load homepage
     [self loadHomePage];
 }
 
@@ -80,7 +95,72 @@
     
     return cell;
 }
+- (IBAction)didTapLogout:(id)sender {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        // PFUser.current() will now be nil
+    }];
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+    //    [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
+    NSLog(@"%@", @"Logged out successfully!");
+}
 
+// loading more data for infinite scroll
+- (void)loadMoreData {
+    // construct PFQuery
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 20;
+    
+    // fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            // do something with the data fetched
+            NSLog(@"Successfully loaded more data");
+            // Update flag
+            self.isMoreDataLoading = false;
+            [loadingMoreView stopAnimating];
+//            self.posts = posts;
+            NSMutableArray *updatedPosts = [self.posts arrayByAddingObjectsFromArray:posts];
+            self.posts = updatedPosts;
+            NSLog(@"%@", self.posts);
+            [self.tableView reloadData];
+        }
+        else {
+            // handle error
+            NSLog(@"Error getting more data: %@", error.localizedDescription);
+        }
+    }];
+}
+
+// infinite scroll
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+
+    if(!self.isMoreDataLoading){
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+            isMoreDataLoading = true;
+            
+            // Update position of loadingMoreView, and start loading indicator
+            CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+            loadingMoreView.frame = frame;
+            [loadingMoreView startAnimating];
+            
+            // Code to load more results
+            [self loadMoreData];
+        }
+        
+    }
+    
+}
 
 #pragma mark - Navigation
 

@@ -147,7 +147,7 @@
                     <connections>
                         <outlet property="passwordField" destination="xpz-LM-MEH" id="sQC-8w-4gI"/>
                         <outlet property="usernameField" destination="LoF-lj-Ban" id="7bt-Gf-iPz"/>
-                        <segue destination="Z90-yc-EnM" kind="show" identifier="loginSegue" id="xai-B1-f5e"/>
+                        <segue destination="hHP-6g-SaB" kind="show" identifier="loginSegue" id="teY-8z-Kaf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -207,7 +207,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="mfg-Hl-qVU"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="Txo-mG-vO0"/>
+                    <navigationItem key="navigationItem" title="Home" id="Txo-mG-vO0">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="67D-nx-xXT">
+                            <connections>
+                                <action selector="didTapLogout:" destination="cbw-F2-t2Q" id="eNk-am-OSj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="84h-1g-PHl" id="Osc-Kr-J5n"/>
                     </connections>
@@ -215,24 +221,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lcT-5h-c37" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-50.399999999999999" y="1631.3343328335834"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="KMt-DU-g94">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZVG-Tx-Mle" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="AuthenticatedNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Z90-yc-EnM" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ITf-7q-caz">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="hHP-6g-SaB" kind="relationship" relationship="rootViewController" id="JwG-Tl-1bS"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="-10" y="76"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tDo-CL-vlK">
@@ -384,7 +372,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="EZ0-kp-Ppq"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Huf-Fi-gMe"/>
+                    <navigationItem key="navigationItem" id="Huf-Fi-gMe">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="5cp-04-ePf"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aVy-na-bZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -393,7 +383,7 @@
         <!--Main Tab Bar Controller-->
         <scene sceneID="5Y2-E7-22A">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="hHP-6g-SaB" customClass="MainTabBarController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="AuthenticatedViewController" automaticallyAdjustsScrollViewInsets="NO" id="hHP-6g-SaB" customClass="MainTabBarController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="JMG-Sj-aO2">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="ptq-jc-gef">

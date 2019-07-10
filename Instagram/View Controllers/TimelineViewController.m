@@ -11,6 +11,7 @@
 #import "Post.h"
 #import "PostCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "DetailsViewController.h"
 
 @interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -80,14 +81,23 @@
     return cell;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    UITableViewCell *tappedCell = sender;
+    // get the indexPath for the tapped cell
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    // get the tapped movie using the indexPath for the tapped cell
+    Post *post = self.posts[indexPath.row];
+    // to hand the movie : get the new view controller using [segue destinationViewController] and cast it
+    DetailsViewController *detailsViewController = [segue destinationViewController];
+    
+    detailsViewController.post = post;
 }
-*/
+
 
 @end

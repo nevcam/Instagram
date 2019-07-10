@@ -88,8 +88,8 @@
 
 
 - (IBAction)postButtonTapped:(id)sender {
-    UIImage *resizedEdited = [self resizeImage:self.editedImg withSize:CGSizeMake(300, 300)];
-    UIImage *resizedOriginal = [self resizeImage:self.originalImg withSize:CGSizeMake(300, 300)];
+    UIImage *resizedEdited = [self resizeImage:self.editedImg withSize:CGSizeMake(450, 450)];
+    UIImage *resizedOriginal = [self resizeImage:self.originalImg withSize:CGSizeMake(450, 450)];
     [Post postUserImage:resizedEdited withCaption:self.captionField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(error){
             NSLog(@"Error posting!: %@", error.localizedDescription);

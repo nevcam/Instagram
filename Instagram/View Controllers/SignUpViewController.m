@@ -43,6 +43,8 @@
     newUser.username = self.usernameField.text;
     newUser.email = self.emailField.text;
     newUser.password = self.passwordField.text;
+//    newUser.description = [NSString new];
+    
     
     if (![newUser.username  isEqual: @""] && ![newUser.email  isEqual: @""]  && ![newUser.password  isEqual: @""] ) {
         // call sign up function on the object
@@ -64,22 +66,18 @@
                 }];
             } else {
                 NSLog(@"User registered successfully");
-                //            UIAlertController *alertSuccess = [UIAlertController alertControllerWithTitle:@"Successful" message:@"Registered successfully!" preferredStyle:(UIAlertControllerStyleAlert)];
-                //
-                //            // create a try again action
-                //            UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay!" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
-                //                // function calls itself to try again!
-                //            }];
-                //
-                //            // add the cancel action to the alertController
-                //            [alertSuccess addAction:okayAction];
-                //            [self presentViewController:alertSuccess animated:YES completion:^{
-                //
-                //            }];
-                
+                UIImage *chosenImage = [UIImage imageNamed:@"profile-pic-placeholder"];
+                NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.5f);
+                PFFileObject *imageFile = [PFFileObject fileObjectWithName:@"Profileimage.png" data:imageData];
+                newUser[@"ProfilePic"] = imageFile;
+                newUser[@"bio"] = @"";
+                [newUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (! error) {
+                        [self dismissViewControllerAnimated:true completion:nil];
+                    }
+                }];
                 // manually segue to logged in view
 //                [self performSegueWithIdentifier:@"signUpSegue" sender:nil];
-                [self dismissViewControllerAnimated:true completion:nil];
                 
             }
         }];

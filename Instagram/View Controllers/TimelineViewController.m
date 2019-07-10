@@ -92,6 +92,11 @@ InfiniteScrollActivityView* loadingMoreView;
 
     cell.captionLabel.text = post.caption;
     cell.usernameLabel.text = post.author.username;
+    cell.likeCountLabel.text = [post.likeCount stringValue];
+    
+//    NSURL *profilePhotoURL = [NSURL URLWithString:post.author.];
+//    cell.profilePhotoView.image = nil;
+//    [cell.profilePhotoView setImageWithURL:profilePhotoURL];
     
     return cell;
 }
@@ -124,9 +129,11 @@ InfiniteScrollActivityView* loadingMoreView;
             // Update flag
             self.isMoreDataLoading = false;
             [loadingMoreView stopAnimating];
-//            self.posts = posts;
+            
+            // check this part
             NSMutableArray *updatedPosts = [self.posts arrayByAddingObjectsFromArray:posts];
             self.posts = updatedPosts;
+            
             NSLog(@"%@", self.posts);
             [self.tableView reloadData];
         }

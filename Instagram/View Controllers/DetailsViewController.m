@@ -31,6 +31,7 @@
     // Convert Date to String
 //    self.createdAtString = date.shortTimeAgoSinceNow;
     self.timestampLabel.text = date.timeAgoSinceNow;
+    self.likeCountLabel.text = [self.post.likeCount stringValue];
 }
 
 /*

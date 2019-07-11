@@ -558,7 +558,11 @@
                         <viewLayoutGuide key="safeArea" id="cKQ-ez-cvv"/>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Profile" id="wz2-Y1-1mF">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="BEg-uj-zBZ"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="BEg-uj-zBZ">
+                            <connections>
+                                <action selector="didTapSave:" destination="Kmj-2P-Hhl" id="I5U-tD-jkr"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bioField" destination="TBh-oj-Rz9" id="XAS-oR-lQL"/>

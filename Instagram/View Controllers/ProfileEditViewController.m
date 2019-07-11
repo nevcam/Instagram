@@ -7,9 +7,9 @@
 //
 
 #import "ProfileEditViewController.h"
-#import "Parse/Parse.h"
 #import "Post.h"
-#import "ProfileEditViewController.h"
+#import "ProfileViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ProfileEditViewController ()
 
@@ -19,8 +19,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"user: %@", self.user);
     // Do any additional setup after loading the view.
-//    self.usernameField.text;
+    self.usernameField.text = self.user[@"username"];
+    self.bioField.text = self.user[@"bio"];
+    self.emailField.text = self.user[@"email"];
+    PFFileObject *imageFile = self.user[@"ProfilePic"];
+    NSURL *photoURL = [NSURL URLWithString:imageFile.url];
+    self.profilePhoto.image = nil;
+    [self.profilePhoto setImageWithURL:photoURL];
+    
+}
+- (IBAction)didTapSave:(id)sender {
+    self.user[@"bio"] = self.bioField.text;
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
 }
 
 /*

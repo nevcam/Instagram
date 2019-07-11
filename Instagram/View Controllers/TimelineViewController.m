@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (nonatomic, strong) NSMutableArray *posts;
+@property (nonatomic, weak) PFUser *user;
 @end
 
 @implementation TimelineViewController
@@ -62,6 +63,7 @@ InfiniteScrollActivityView* loadingMoreView;
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             self.posts = posts;
             NSLog(@"%@", self.posts);
+            self.user = [PFUser currentUser];
             [self.tableView reloadData];
         }
         else {
@@ -93,10 +95,11 @@ InfiniteScrollActivityView* loadingMoreView;
     cell.captionLabel.text = post.caption;
     cell.usernameLabel.text = post.author.username;
     cell.likeCountLabel.text = [post.likeCount stringValue];
-    
-//    NSURL *profilePhotoURL = [NSURL URLWithString:post.author.];
-//    cell.profilePhotoView.image = nil;
-//    [cell.profilePhotoView setImageWithURL:profilePhotoURL];
+    PFFileObject *imageFile = post.author[@"ProfilePic"];
+    NSURL *profilePhotoURL = [NSURL URLWithString:imageFile.url];
+    cell.profilePhotoView.image = nil;
+    [cell.profilePhotoView setImageWithURL:profilePhotoURL];
+
     
     return cell;
 }

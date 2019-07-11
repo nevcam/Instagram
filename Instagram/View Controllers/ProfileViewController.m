@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *posts;
 @property (nonatomic, strong) NSMutableArray *myPosts;
+@property (nonatomic, strong) PFUser *user;
 @end
 
 @implementation ProfileViewController
@@ -29,7 +30,8 @@
     self.collectionView.delegate = self;
     self.myPosts = [NSMutableArray new];
     // Do any additional setup after loading the view.
-    [self loadProfilePosts];
+    [self loadProfile];
+    [self.collectionView reloadData];
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout*) self.collectionView.collectionViewLayout;
     
     layout.minimumInteritemSpacing = 4;
@@ -41,7 +43,8 @@
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
 }
 
-- (void)loadProfilePosts {
+
+- (void)loadProfile {
     // construct PFQuery
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
@@ -63,7 +66,7 @@
             self.usernameLabel.text = [PFUser currentUser][@"username"];
             self.bioLabel.text = [PFUser currentUser][@"bio"];
 //            NSLog(@"BIO: %@", [PFUser currentUser][@"bio"]);
-            NSLog(@"PROFILEPIC: %@", [PFUser currentUser][@"ProfilePic"]);
+//            NSLog(@"PROFILEPIC: %@", [PFUser currentUser][@"ProfilePic"]);
             PFFileObject *imageFile = [PFUser currentUser][@"ProfilePic"];
             NSURL *photoURL = [NSURL URLWithString:imageFile.url];
 //            NSURL *photoURL = [PFUser currentUser][@"ProfilePic"];
@@ -71,6 +74,7 @@
             [self.profilePhotoView setImageWithURL:photoURL];
             
             NSLog(@"PF USER :%@", [PFUser currentUser]);
+            self.user = [PFUser currentUser];
             [self.collectionView reloadData];
         }
         else {
@@ -103,14 +107,19 @@
     return self.myPosts.count;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier  isEqual: @"editSegue"]){
+        PFUser *user = self.user;
+        ProfileEditViewController *profileEditViewController = [segue destinationViewController];
+        profileEditViewController.user = user;
+    }
 }
-*/
+
 
 @end

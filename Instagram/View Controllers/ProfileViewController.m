@@ -15,7 +15,7 @@
 #import "PhotoGridCell.h"
 #import "ProfileEditViewController.h"
 
-@interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ProfileEditViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *posts;
 @property (nonatomic, strong) NSMutableArray *myPosts;
@@ -59,7 +59,7 @@
             NSLog(@"😎😎😎 Successfully loaded photos");
             for (Post *post in posts) {
                 if ([post[@"author"][@"username"] isEqualToString:[PFUser currentUser][@"username"]]) {
-                    [self.myPosts insertObject:post atIndex:0];
+                    [self.myPosts addObject:post ];
                 }
             }
             NSLog(@"MY POSTS:%@", self.myPosts);
@@ -72,6 +72,9 @@
 //            NSURL *photoURL = [PFUser currentUser][@"ProfilePic"];
             self.profilePhotoView.image = nil;
             [self.profilePhotoView setImageWithURL:photoURL];
+            self.profilePhotoView.layer.cornerRadius = self.profilePhotoView.frame.size.width / 2;
+            self.profilePhotoView.layer.masksToBounds = YES;
+            [self.view addSubview: self.profilePhotoView];
             
             NSLog(@"PF USER :%@", [PFUser currentUser]);
             self.user = [PFUser currentUser];
@@ -95,6 +98,7 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PhotoGridCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoGridCell" forIndexPath:indexPath];
+//    self.myPosts=[[[self.myPosts reverseObjectEnumerator] allObjects] mutableCopy];
     Post *post = self.myPosts[indexPath.item];
     
     NSURL *photoURL = [NSURL URLWithString:post.image.url];
@@ -118,8 +122,13 @@
         PFUser *user = self.user;
         ProfileEditViewController *profileEditViewController = [segue destinationViewController];
         profileEditViewController.user = user;
+        profileEditViewController.delegate = self;
     }
 }
 
+
+- (void)didSave {
+    [self loadProfile];
+}
 
 @end

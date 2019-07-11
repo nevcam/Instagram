@@ -32,6 +32,14 @@
 //    self.createdAtString = date.shortTimeAgoSinceNow;
     self.timestampLabel.text = date.timeAgoSinceNow;
     self.likeCountLabel.text = [self.post.likeCount stringValue];
+    PFFileObject *imageFile = self.post.author[@"ProfilePic"];
+    NSURL *profilePhotoURL = [NSURL URLWithString:imageFile.url];
+    self.profilePhotoView.image = nil;
+    [self.profilePhotoView setImageWithURL:profilePhotoURL];
+    // make profile photo a circle
+    self.profilePhotoView.layer.cornerRadius = self.profilePhotoView.frame.size.height /2;
+    self.profilePhotoView.layer.masksToBounds = YES;
+    self.profilePhotoView.layer.borderWidth = 0;
 }
 
 /*

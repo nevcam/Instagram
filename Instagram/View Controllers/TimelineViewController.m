@@ -14,8 +14,10 @@
 #import "DetailsViewController.h"
 #import "AppDelegate.h"
 #import "InfiniteScrollActivityView.h"
+#import "DateTools.h"
+#import "UserProfileViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, PostCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (nonatomic, strong) NSMutableArray *posts;
@@ -32,7 +34,7 @@ InfiniteScrollActivityView* loadingMoreView;
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.rowHeight = 450;
+    self.tableView.rowHeight = 480;
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
@@ -89,6 +91,7 @@ InfiniteScrollActivityView* loadingMoreView;
     Post *post = self.posts[indexPath.row];
     
     NSURL *photoURL = [NSURL URLWithString:post.image.url];
+    cell.post = post;
     cell.photoView.image = nil;
     [cell.photoView setImageWithURL:photoURL];
 
@@ -99,7 +102,15 @@ InfiniteScrollActivityView* loadingMoreView;
     NSURL *profilePhotoURL = [NSURL URLWithString:imageFile.url];
     cell.profilePhotoView.image = nil;
     [cell.profilePhotoView setImageWithURL:profilePhotoURL];
-
+    // make profile photo a circle
+    cell.profilePhotoView.layer.cornerRadius = cell.profilePhotoView.frame.size.height /2;
+    cell.profilePhotoView.layer.masksToBounds = YES;
+    cell.profilePhotoView.layer.borderWidth = 0;
+    cell.delegate = self;
+    NSDate *date = cell.post.createdAt;
+    // Convert Date to String
+    //    self.createdAtString = date.shortTimeAgoSinceNow;
+    cell.timestampLabel.text = date.timeAgoSinceNow;
     
     return cell;
 }
@@ -147,6 +158,7 @@ InfiniteScrollActivityView* loadingMoreView;
     }];
 }
 
+
 // infinite scroll
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
@@ -178,16 +190,31 @@ InfiniteScrollActivityView* loadingMoreView;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    UITableViewCell *tappedCell = sender;
-    // get the indexPath for the tapped cell
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-    // get the tapped movie using the indexPath for the tapped cell
-    Post *post = self.posts[indexPath.row];
-    // to hand the movie : get the new view controller using [segue destinationViewController] and cast it
-    DetailsViewController *detailsViewController = [segue destinationViewController];
-    
-    detailsViewController.post = post;
+    if([segue.identifier  isEqual: @"userSegue"]){
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.posts[indexPath.row];
+        PFUser *user = post.author;
+        UserProfileViewController *userProfileViewController = [segue destinationViewController];
+        userProfileViewController.user = user;
+        
+    }
+    else if ([segue.identifier  isEqual: @"detailSegue"]) {
+        UITableViewCell *tappedCell = sender;
+
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+
+        Post *post = self.posts[indexPath.row];
+        
+        DetailsViewController *detailsViewController = [segue destinationViewController];
+        
+        detailsViewController.post = post;
+    } else {}
 }
 
+- (void)postCell:(PostCell *)postCell didTap:(PFUser *)user{
+    // TODO: Perform segue to profile view controller
+    [self performSegueWithIdentifier:@"userSegue" sender:user];
+}
 
 @end

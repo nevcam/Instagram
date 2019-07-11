@@ -90,6 +90,7 @@
 - (IBAction)postButtonTapped:(id)sender {
     UIImage *resizedEdited = [self resizeImage:self.editedImg withSize:CGSizeMake(450, 450)];
     UIImage *resizedOriginal = [self resizeImage:self.originalImg withSize:CGSizeMake(450, 450)];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Post postUserImage:resizedEdited withCaption:self.captionField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(error){
             NSLog(@"Error posting!: %@", error.localizedDescription);
@@ -97,6 +98,8 @@
         else{
 //            [self.delegate didTweet:tweet];
             NSLog(@"New Post Success!");
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self cleanPage];
 //            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 //
 //            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -107,6 +110,12 @@
         }
         
     }];
+    
+}
+
+- (void)cleanPage {
+    self.captionField.text = @"";
+    self.photoField.image = [UIImage imageNamed:@"image_placeholder"];
 }
 
 /*

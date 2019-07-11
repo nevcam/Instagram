@@ -10,8 +10,12 @@
 #import "Parse/Parse.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol ProfileEditViewControllerDelegate
+- (void)didSave;
+@end
 
 @interface ProfileEditViewController : UIViewController
+@property (nonatomic, weak) id<ProfileEditViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePhoto;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *bioField;

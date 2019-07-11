@@ -19,6 +19,8 @@
 		D9AB757622D5152900D267FC /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AB757522D5152900D267FC /* MainTabBarController.m */; };
 		D9AB757922D5228900D267FC /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AB757822D5228900D267FC /* Post.m */; };
 		D9AB757D22D540E400D267FC /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AB757C22D540E400D267FC /* PostCell.m */; };
+		D9AF5D1A22D7B52900E32E41 /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF5D1922D7B52900E32E41 /* UserProfileViewController.m */; };
+		D9AF5D1D22D7B6DD00E32E41 /* UserProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF5D1C22D7B6DD00E32E41 /* UserProfileCell.m */; };
 		D9BE157D22D6769C001FA02E /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9BE157C22D6769C001FA02E /* ProfileViewController.m */; };
 		D9BE158622D67AEB001FA02E /* PhotoGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9BE158522D67AEB001FA02E /* PhotoGridCell.m */; };
 		D9BE158922D6A0FF001FA02E /* ProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9BE158822D6A0FF001FA02E /* ProfileEditViewController.m */; };
@@ -73,6 +75,10 @@
 		D9AB757822D5228900D267FC /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		D9AB757B22D540E400D267FC /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
 		D9AB757C22D540E400D267FC /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
+		D9AF5D1822D7B52900E32E41 /* UserProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
+		D9AF5D1922D7B52900E32E41 /* UserProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
+		D9AF5D1B22D7B6DD00E32E41 /* UserProfileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserProfileCell.h; sourceTree = "<group>"; };
+		D9AF5D1C22D7B6DD00E32E41 /* UserProfileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserProfileCell.m; sourceTree = "<group>"; };
 		D9BE157B22D6769C001FA02E /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		D9BE157C22D6769C001FA02E /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		D9BE158422D67AEA001FA02E /* PhotoGridCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoGridCell.h; sourceTree = "<group>"; };
@@ -208,8 +214,12 @@
 			children = (
 				D9AB757A22D5229400D267FC /* Models */,
 				D9AB757322D5002F00D267FC /* View Controllers */,
+				D9AF5D1822D7B52900E32E41 /* UserProfileViewController.h */,
+				D9AF5D1922D7B52900E32E41 /* UserProfileViewController.m */,
 				D9BE158422D67AEA001FA02E /* PhotoGridCell.h */,
 				D9BE158522D67AEB001FA02E /* PhotoGridCell.m */,
+				D9AF5D1B22D7B6DD00E32E41 /* UserProfileCell.h */,
+				D9AF5D1C22D7B6DD00E32E41 /* UserProfileCell.m */,
 				D97F8E0C22D56BC3008B3F8A /* InfiniteScrollActivityView.h */,
 				D97F8E0D22D56BC3008B3F8A /* InfiniteScrollActivityView.m */,
 				D9AB757B22D540E400D267FC /* PostCell.h */,
@@ -463,6 +473,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9AF5D1A22D7B52900E32E41 /* UserProfileViewController.m in Sources */,
 				D9AB757222D5001700D267FC /* NewPostViewController.m in Sources */,
 				D9BE158622D67AEB001FA02E /* PhotoGridCell.m in Sources */,
 				D97F8E0B22D55874008B3F8A /* DetailsViewController.m in Sources */,
@@ -474,6 +485,7 @@
 				D9FC5B7A22D3FB26003F13A5 /* AppDelegate.m in Sources */,
 				D9AB757622D5152900D267FC /* MainTabBarController.m in Sources */,
 				D97F8E0E22D56BC3008B3F8A /* InfiniteScrollActivityView.m in Sources */,
+				D9AF5D1D22D7B6DD00E32E41 /* UserProfileCell.m in Sources */,
 				D9A3996822D41468009397AE /* TimelineViewController.m in Sources */,
 				D9BE157D22D6769C001FA02E /* ProfileViewController.m in Sources */,
 				D9AB757D22D540E400D267FC /* PostCell.m in Sources */,

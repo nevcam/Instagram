@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "PhotoGridCell.h"
 #import "ProfileEditViewController.h"
+#import "LoginViewController.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ProfileEditViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -92,6 +93,16 @@
 }
 
 - (IBAction)didTapLogout:(id)sender {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        // PFUser.current() will now be nil
+    }];
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+    //    [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
+    NSLog(@"%@", @"Logged out successfully!");
 }
 
 
@@ -128,7 +139,35 @@
 
 
 - (void)didSave {
-    [self loadProfile];
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 100;
+    
+    // fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            // do something with the data fetched
+            NSLog(@"😎😎😎 Successfully loaded photos");
+            self.usernameLabel.text = [PFUser currentUser][@"username"];
+            self.bioLabel.text = [PFUser currentUser][@"bio"];
+
+            PFFileObject *imageFile = [PFUser currentUser][@"ProfilePic"];
+            NSURL *photoURL = [NSURL URLWithString:imageFile.url];
+
+            self.profilePhotoView.image = nil;
+            [self.profilePhotoView setImageWithURL:photoURL];
+            self.profilePhotoView.layer.cornerRadius = self.profilePhotoView.frame.size.width / 2;
+            self.profilePhotoView.layer.masksToBounds = YES;
+            [self.view addSubview: self.profilePhotoView];
+            self.user = [PFUser currentUser];
+            [self.collectionView reloadData];
+        }
+        else {
+            // handle error
+            NSLog(@"😫😫😫 Error getting photos: %@", error.localizedDescription);
+        }
+    }];
 }
 
 @end

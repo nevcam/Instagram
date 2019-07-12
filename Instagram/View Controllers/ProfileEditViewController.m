@@ -38,6 +38,7 @@
     self.user[@"ProfilePic"] = imageFile;
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
+            [self.delegate didSave];
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             // handle error

@@ -111,7 +111,7 @@ InfiniteScrollActivityView* loadingMoreView;
     // Convert Date to String
     //    self.createdAtString = date.shortTimeAgoSinceNow;
     cell.timestampLabel.text = date.timeAgoSinceNow;
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (IBAction)didTapLogout:(id)sender {

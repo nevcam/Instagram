@@ -174,6 +174,8 @@
 				D9BE157C22D6769C001FA02E /* ProfileViewController.m */,
 				D9BE158722D6A0FF001FA02E /* ProfileEditViewController.h */,
 				D9BE158822D6A0FF001FA02E /* ProfileEditViewController.m */,
+				D9AF5D1822D7B52900E32E41 /* UserProfileViewController.h */,
+				D9AF5D1922D7B52900E32E41 /* UserProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -214,8 +216,6 @@
 			children = (
 				D9AB757A22D5229400D267FC /* Models */,
 				D9AB757322D5002F00D267FC /* View Controllers */,
-				D9AF5D1822D7B52900E32E41 /* UserProfileViewController.h */,
-				D9AF5D1922D7B52900E32E41 /* UserProfileViewController.m */,
 				D9BE158422D67AEA001FA02E /* PhotoGridCell.h */,
 				D9BE158522D67AEB001FA02E /* PhotoGridCell.m */,
 				D9AF5D1B22D7B6DD00E32E41 /* UserProfileCell.h */,

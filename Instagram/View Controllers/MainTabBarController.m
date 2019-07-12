@@ -24,14 +24,12 @@
 - (IBAction)didTapLogout:(id)sender {
     
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        // PFUser.current() will now be nil
     }];
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     appDelegate.window.rootViewController = loginViewController;
-//    [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
     NSLog(@"%@", @"Logged out successfully!");
 }
 

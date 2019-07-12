@@ -76,8 +76,6 @@
                         [self dismissViewControllerAnimated:true completion:nil];
                     }
                 }];
-                // manually segue to logged in view
-//                [self performSegueWithIdentifier:@"signUpSegue" sender:nil];
                 
             }
         }];

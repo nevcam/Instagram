@@ -96,16 +96,9 @@
             NSLog(@"Error posting!: %@", error.localizedDescription);
         }
         else{
-//            [self.delegate didTweet:tweet];
             NSLog(@"New Post Success!");
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [self cleanPage];
-//            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//
-//            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//            TimelineViewController *timelineViewController = [storyboard instantiateViewControllerWithIdentifier:@"TimelineViewController"];
-//            appDelegate.window.rootViewController = timelineViewController;
-//            [self performSegueWithIdentifier:@"postTimelineSegue" sender:nil];
             
         }
         

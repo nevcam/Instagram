@@ -55,14 +55,10 @@
                     [self.userPosts addObject:post ];
                 }
             }
-//            NSLog(@"MY POSTS:%@", self.userPosts);
             self.usernameLabel.text = self.user[@"username"];
             self.bioLabel.text = self.user[@"bio"];
-            //            NSLog(@"BIO: %@", self.user[@"bio"]);
-            //            NSLog(@"PROFILEPIC: %@", self.user[@"ProfilePic"]);
             PFFileObject *imageFile = self.user[@"ProfilePic"];
             NSURL *photoURL = [NSURL URLWithString:imageFile.url];
-            //            NSURL *photoURL = [PFUser currentUser][@"ProfilePic"];
             self.profilePhotoView.image = nil;
             [self.profilePhotoView setImageWithURL:photoURL];
             self.profilePhotoView.layer.cornerRadius = self.profilePhotoView.frame.size.width / 2;
@@ -81,7 +77,6 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UserProfileCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserProfileCell" forIndexPath:indexPath];
-    //    self.myPosts=[[[self.myPosts reverseObjectEnumerator] allObjects] mutableCopy];
     Post *post = self.userPosts[indexPath.item];
     
     NSURL *photoURL = [NSURL URLWithString:post.image.url];

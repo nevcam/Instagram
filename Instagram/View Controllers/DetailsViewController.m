@@ -25,11 +25,9 @@
     
     self.captionLabel.text = self.post.caption;
     self.usernameLabel.text = self.post.author.username;
-//    self.timestampLabel.text = self.post.createdAt;
     // Convert String to Date
     NSDate *date = self.post.createdAt;
     // Convert Date to String
-//    self.createdAtString = date.shortTimeAgoSinceNow;
     self.timestampLabel.text = date.timeAgoSinceNow;
     self.likeCountLabel.text = [self.post.likeCount stringValue];
     PFFileObject *imageFile = self.post.author[@"ProfilePic"];

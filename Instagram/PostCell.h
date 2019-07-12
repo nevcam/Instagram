@@ -27,9 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @protocol PostCellDelegate
-// TODO: Add required methods the delegate needs to implement
 - (void)postCell:(PostCell *) postCell didTap: (PFUser *)user;
-//@property (nonatomic, weak) id<TweetCellDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

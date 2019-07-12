@@ -49,7 +49,6 @@
     // construct PFQuery
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
-//    [postQuery whereKey:@"username" equalTo:[PFUser currentUser]];
     [postQuery includeKey:@"author"];
     postQuery.limit = 100;
     
@@ -66,11 +65,8 @@
             NSLog(@"MY POSTS:%@", self.myPosts);
             self.usernameLabel.text = [PFUser currentUser][@"username"];
             self.bioLabel.text = [PFUser currentUser][@"bio"];
-//            NSLog(@"BIO: %@", [PFUser currentUser][@"bio"]);
-//            NSLog(@"PROFILEPIC: %@", [PFUser currentUser][@"ProfilePic"]);
             PFFileObject *imageFile = [PFUser currentUser][@"ProfilePic"];
             NSURL *photoURL = [NSURL URLWithString:imageFile.url];
-//            NSURL *photoURL = [PFUser currentUser][@"ProfilePic"];
             self.profilePhotoView.image = nil;
             [self.profilePhotoView setImageWithURL:photoURL];
             self.profilePhotoView.layer.cornerRadius = self.profilePhotoView.frame.size.width / 2;
@@ -94,14 +90,12 @@
 
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        // PFUser.current() will now be nil
     }];
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     appDelegate.window.rootViewController = loginViewController;
-    //    [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
     NSLog(@"%@", @"Logged out successfully!");
 }
 
@@ -109,7 +103,6 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PhotoGridCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoGridCell" forIndexPath:indexPath];
-//    self.myPosts=[[[self.myPosts reverseObjectEnumerator] allObjects] mutableCopy];
     Post *post = self.myPosts[indexPath.item];
     
     NSURL *photoURL = [NSURL URLWithString:post.image.url];

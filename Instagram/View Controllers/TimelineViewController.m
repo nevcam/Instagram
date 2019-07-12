@@ -34,7 +34,6 @@ InfiniteScrollActivityView* loadingMoreView;
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-//    self.tableView.rowHeight = 480;
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
@@ -109,21 +108,18 @@ InfiniteScrollActivityView* loadingMoreView;
     cell.delegate = self;
     NSDate *date = cell.post.createdAt;
     // Convert Date to String
-    //    self.createdAtString = date.shortTimeAgoSinceNow;
     cell.timestampLabel.text = date.timeAgoSinceNow;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        // PFUser.current() will now be nil
     }];
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     appDelegate.window.rootViewController = loginViewController;
-    //    [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
     NSLog(@"%@", @"Logged out successfully!");
 }
 
@@ -213,7 +209,6 @@ InfiniteScrollActivityView* loadingMoreView;
 }
 
 - (void)postCell:(PostCell *)postCell didTap:(PFUser *)user{
-    // TODO: Perform segue to profile view controller
     [self performSegueWithIdentifier:@"userSegue" sender:user];
 }
 

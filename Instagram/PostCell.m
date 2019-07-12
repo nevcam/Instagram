@@ -63,7 +63,6 @@
 }
 
 - (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
-    // TODO: Call method on delegate
     [self.delegate postCell:self didTap:self.post.author];
     
 }
